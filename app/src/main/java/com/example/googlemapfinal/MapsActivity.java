@@ -48,22 +48,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Liaison
         bt = findViewById(R.id.bt);
+
         bt.setOnClickListener(this);
 
         // Demander la permission à l'utilisateur d'avoir votre localisation ...............................
         // Si je n'ai pas encore la permission :
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             //je demande la permission
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQ_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{ android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQ_CODE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull  int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_REQ_CODE) {
             //Si j'ai la permission et si ma carte est valide
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 if(mMap != null) {
                     mMap.setMyLocationEnabled(true);
                 }
@@ -72,7 +72,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(this, "On ne peut pas utiliser la localisation sans la permission", Toast.LENGTH_SHORT).show();
             }
         }
-    }
 
     /**
      * Manipulates the map once available.
@@ -93,11 +92,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Si j'ai la permission et si ma carte est valide
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if(mMap != null) {
+
                 mMap.setMyLocationEnabled(true);
-            }
+           // mMap.setOnPoiClickListener(this);
         }
     }
+
 
     @Override
     // Quand je clique sur mon bouton "ajouter" il va sur l'autre pointeur
